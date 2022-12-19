@@ -26,7 +26,7 @@ using UnityEngine;
         public Transform MainCameraTransform { get; private set; }
 
         private PlayerMovementStateMachine movementStateMachine;
-
+    internal SkillEffectGenerator skillEffectGenerator;
         private void Awake()
         {
             CameraRecenteringUtility.Initialize();
@@ -41,6 +41,8 @@ using UnityEngine;
             MainCameraTransform = Camera.main.transform;
 
             movementStateMachine = new PlayerMovementStateMachine(this);
+
+        skillEffectGenerator = GetComponent<SkillEffectGenerator>();
         }
             
         private void Start()
@@ -85,4 +87,10 @@ using UnityEngine;
         {
             movementStateMachine.OnAnimationTransitionEvent();
         }
+    public void OnAttackEvent()
+    {
+        movementStateMachine.OnAttackEvent();
     }
+
+    
+}

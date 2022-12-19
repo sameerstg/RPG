@@ -25,6 +25,11 @@ using UnityEngine;
         [SerializeField] private string hardLandParameterName = "isHardLanding";
         [SerializeField] private string rollLeftParameterName = "RollLeft";
         [SerializeField] private string rollRightParameterName = "RollRight";
+        [SerializeField] private string attackParameterName = "Attack";
+        [SerializeField] private string comboParameterName = "Combo";
+        [SerializeField] private string skill1ParameterName = "Skill1";
+        [SerializeField] private string skill2ParameterName = "Skill2";
+        [SerializeField] private string ultimateParameterName = "Ultimate";
 
 
     [Header("Airborne Parameter Names")]
@@ -45,10 +50,14 @@ using UnityEngine;
         public int HardStopParameterHash { get; private set; }
         public int RollParameterHash { get; private set; }
         public int HardLandParameterHash { get; private set; }
-
         public int FallParameterHash { get; private set; }
-         public int RollLeftParameterHash { get; private set; }
-    public int RollRightParameterHash { get; private set; }
+        public int RollLeftParameterHash { get; private set; }
+        public int RollRightParameterHash { get; private set; }
+        public int Attack { get; private set; }
+        public int Combo { get; private set; }
+        public int Skill1 { get; private set; }
+        public int Skill2 { get; private set; }
+        public int Ultimate { get; private set; }
 
 
     public void Initialize()
@@ -68,10 +77,13 @@ using UnityEngine;
             HardStopParameterHash = Animator.StringToHash(hardStopParameterName);
             RollParameterHash = Animator.StringToHash(rollParameterName);
             HardLandParameterHash = Animator.StringToHash(hardLandParameterName);
-
             FallParameterHash = Animator.StringToHash(fallParameterName);
-        RollLeftParameterHash = Animator.StringToHash(rollLeftParameterName);
-        RollRightParameterHash = Animator.StringToHash(rollRightParameterName);
-
+            RollLeftParameterHash = Animator.StringToHash(rollLeftParameterName);
+            RollRightParameterHash = Animator.StringToHash(rollRightParameterName);
+            Attack = Animator.StringToHash(attackParameterName);
+            Combo = Animator.StringToHash(comboParameterName);
+            Skill1 = Animator.StringToHash(skill1ParameterName);
+            Skill2 = Animator.StringToHash(skill2ParameterName);
+            Ultimate = Animator.StringToHash(ultimateParameterName);
     }
 }

@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+
+
+    [SerializeField]internal Character character;
     StateMachineImplementation state;
     public AnimationData animationData;
     internal NavMeshAgent agent;
@@ -14,11 +17,12 @@ public class Enemy : MonoBehaviour
     internal ChasingState chasingState;
     internal AttackingState attackingState;
     internal Animator animator;
-
+    internal Rigidbody rb;
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player");
         baseState = new(this);
         idleState = new(this);
@@ -43,17 +47,21 @@ public class Enemy : MonoBehaviour
     {
         state.OnAnimationExitEvent();
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        state.OnTriggerEnter(other);
+    }
     internal void SwitchState(StateMachineImplementation state)
     {
         if (this.state != null)
         {
-            print(state);
             this.state.Exit();
 
         }
         this.state = state;
         this.state.Enter();
     }
+    
 }
 public class BaseState :StateMachineImplementation
 {
@@ -88,6 +96,7 @@ public class BaseState :StateMachineImplementation
 
     public override void OnTriggerEnter(Collider collider)
     {
+
     }
 
     public override void OnTriggerExit(Collider collider)
@@ -95,17 +104,32 @@ public class BaseState :StateMachineImplementation
     }
     internal void LookAtPlayer()
     {
-        enemy.transform.LookAt(enemy.player.transform.position);
+        enemy.rb.MoveRotation(Quaternion.Euler(new Vector3(0, GetDirectionAngle(-enemy.transform.position + enemy.player.transform.position), 0)));
 
+    }
+    private float GetDirectionAngle(Vector3 direction)
+    {
+        float directionAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+
+        if (directionAngle < 0f)
+        {
+            directionAngle += 360f;
+        }
+
+        return directionAngle;
     }
     public override void Update()
     {
         
         distanceFromPlayer = Vector3.Distance(enemy.player.transform.position, enemy.transform.position);
-        if (distanceFromPlayer<=enemy.agent.stoppingDistance)
+    }
+    internal void CheckToAttack()
+    {
+        if (distanceFromPlayer <= enemy.agent.stoppingDistance)
         {
             enemy.SwitchState(enemy.attackingState);
         }
+
     }
 }
 public class IdleState : BaseState
@@ -126,6 +150,7 @@ public class IdleState : BaseState
         {
             enemy.SwitchState(enemy.chasingState);
         }
+        CheckToAttack();
 
     }
 }
@@ -145,7 +170,7 @@ public class ChasingState : BaseState
         base.Update();
         LookAtPlayer();
         enemy.agent.SetDestination(enemy.player.transform.position);
-
+        CheckToAttack();
     }
     public override void Exit()
     {
@@ -168,6 +193,14 @@ public class AttackingState : BaseState
     {
         LookAtPlayer();
         base.Update();
+    }
+    public override void OnTriggerEnter(Collider collider)
+    {
+        base.OnTriggerEnter(collider);
+        if (collider.CompareTag("Player"))
+        {
+            Debug.Log("Hit");
+        }
     }
     public override void OnAnimationExitEvent()
     {

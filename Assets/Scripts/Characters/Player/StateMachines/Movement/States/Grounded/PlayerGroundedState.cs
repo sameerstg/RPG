@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -102,9 +103,29 @@ using UnityEngine.InputSystem;
 
             stateMachine.Player.Input.PlayerActions.Jump.started += OnJumpStarted;
             stateMachine.Player.Input.PlayerActions.Roll.started += OnRollStarted;
+            stateMachine.Player.Input.PlayerActions.Combo.started += OnComboStarted;
+            stateMachine.Player.Input.PlayerActions.Skill1.started += OnSkill1Started;
+            stateMachine.Player.Input.PlayerActions.Skill2.started += OnSkill2Started;
+            stateMachine.Player.Input.PlayerActions.Ultimate.started += OnUltimate;
             
 
     }
+
+    private void OnUltimate(InputAction.CallbackContext obj)
+    {
+        stateMachine.ChangeState(stateMachine.UltimateState);
+    }
+
+    private void OnSkill2Started(InputAction.CallbackContext obj)
+    {
+        stateMachine.ChangeState(stateMachine.Skill2State);
+    }
+
+    private void OnSkill1Started(InputAction.CallbackContext obj)
+    {
+        stateMachine.ChangeState(stateMachine.Skill1State);
+    }
+
     private void OnRollStarted(InputAction.CallbackContext context)
     {
         if (context.ReadValue<float>()<0)
@@ -124,9 +145,20 @@ using UnityEngine.InputSystem;
             stateMachine.Player.Input.PlayerActions.Dash.started -= OnDashStarted;
 
             stateMachine.Player.Input.PlayerActions.Jump.started -= OnJumpStarted;
-        }
+        stateMachine.Player.Input.PlayerActions.Combo.started -= OnComboStarted;
+        stateMachine.Player.Input.PlayerActions.Skill1.started -= OnSkill1Started;
+        stateMachine.Player.Input.PlayerActions.Skill2.started -= OnSkill2Started;
+        stateMachine.Player.Input.PlayerActions.Ultimate.started -= OnUltimate;
 
-        protected virtual void OnDashStarted(InputAction.CallbackContext context)
+
+    }
+
+    internal virtual void OnComboStarted(InputAction.CallbackContext obj)
+    {
+        stateMachine.ChangeState(stateMachine.ComboState);
+    }
+
+    protected virtual void OnDashStarted(InputAction.CallbackContext context)
         {
             stateMachine.ChangeState(stateMachine.DashingState);
         }

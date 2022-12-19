@@ -12,4 +12,6 @@ using UnityEngine;
         public void OnAnimationEnterEvent();
         public void OnAnimationExitEvent();
         public void OnAnimationTransitionEvent();
+        public void OnAttackEvent();
+
     }

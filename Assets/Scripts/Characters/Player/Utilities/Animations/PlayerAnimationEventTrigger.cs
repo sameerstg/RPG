@@ -23,11 +23,11 @@ using UnityEngine;
 
         public void TriggerOnMovementStateAnimationExitEvent()
         {
-            if (IsInAnimationTransition())
-            {
-                return;
-            }
-
+        /*if (IsInAnimationTransition())
+        {
+            return;
+        }*/
+        //Debug.Log("Animation exit");
             player.OnMovementStateAnimationExitEvent();
         }
 
@@ -45,4 +45,10 @@ using UnityEngine;
         {
             return player.Animator.IsInTransition(layerIndex);
         }
+    public void Attack()
+    {
+        
+        player.OnAttackEvent();
+
     }
+}

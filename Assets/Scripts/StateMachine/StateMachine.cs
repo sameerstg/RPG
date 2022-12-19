@@ -54,5 +54,9 @@ using UnityEngine;
         public void OnAnimationTransitionEvent()
         {
             currentState?.OnAnimationTransitionEvent();
+        }public void OnAttackEvent()
+        {
+
+        currentState?.OnAttackEvent();
         }
     }

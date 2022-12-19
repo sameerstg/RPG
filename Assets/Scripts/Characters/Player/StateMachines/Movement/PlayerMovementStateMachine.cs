@@ -24,12 +24,17 @@
 
         public PlayerJumpingState JumpingState { get; }
         public PlayerFallingState FallingState { get; }
+        public PlayerAttackState AttackState { get; }
+        public PlayerComboState ComboState { get; }
+        public PlayerSkill1State Skill1State { get; }
+        public PlayerSkill2State Skill2State { get; }
+        public PlayerUltimateState UltimateState { get; }
 
         public PlayerMovementStateMachine(Player player)
         {
             Player = player;
             ReusableData = new PlayerStateReusableData();
-
+        abilites = player.Data.abilities;
             IdlingState = new PlayerIdlingState(this);
             DashingState = new PlayerDashingState(this);
 
@@ -49,5 +54,11 @@
             FallingState = new PlayerFallingState(this);
             RollLeft = new PlayerRollLeft(this);
             RollRight = new PlayerRollRight(this);
+            AttackState = new(this);
+            ComboState = new(this);
+            Skill1State = new(this);
+            Skill2State = new(this);
+            UltimateState = new(this);
+
         }
     }

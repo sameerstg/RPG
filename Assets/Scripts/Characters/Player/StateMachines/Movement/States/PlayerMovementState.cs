@@ -203,8 +203,20 @@ using UnityEngine.InputSystem;
 
             return directionAngle;
         }
+       internal  void LookAtEnemy()
+    {
+       
+        GameObject enemy =  GameManager._instance.enemyManager.GetClosestEnemy(stateMachine.Player.transform.position);
+/*        Debug.Log(stateMachine.abilites);
+*/        if (enemy && Vector3.Distance(enemy.transform.position,stateMachine.Player.transform.position)<=stateMachine.abilites.attackingRange)
+        {
+            stateMachine.ReusableData.CurrentTargetRotation.y = GetDirectionAngle(-stateMachine.Player.transform.position + enemy.transform.position);
+            stateMachine.Player.Rigidbody.MoveRotation(Quaternion.Euler(0, stateMachine.ReusableData.CurrentTargetRotation.y, 0));
+        }
+        
 
-        private float GetDirectionAngle(Vector3 direction)
+    }
+    float GetDirectionAngle(Vector3 direction)
         {
             float directionAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
 
@@ -403,4 +415,9 @@ using UnityEngine.InputSystem;
         {
             return GetPlayerVerticalVelocity().y < -minimumVelocity;
         }
+
+    public virtual void OnAttackEvent()
+    {
+       
     }
+}
