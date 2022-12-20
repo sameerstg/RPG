@@ -30,6 +30,7 @@ using UnityEngine;
         [SerializeField] private string skill1ParameterName = "Skill1";
         [SerializeField] private string skill2ParameterName = "Skill2";
         [SerializeField] private string ultimateParameterName = "Ultimate";
+        [SerializeField] private string getHitParameterName = "GetHit";
 
 
     [Header("Airborne Parameter Names")]
@@ -58,6 +59,7 @@ using UnityEngine;
         public int Skill1 { get; private set; }
         public int Skill2 { get; private set; }
         public int Ultimate { get; private set; }
+        public int GetHit { get; private set; }
 
 
     public void Initialize()
@@ -85,5 +87,7 @@ using UnityEngine;
             Skill1 = Animator.StringToHash(skill1ParameterName);
             Skill2 = Animator.StringToHash(skill2ParameterName);
             Ultimate = Animator.StringToHash(ultimateParameterName);
+            GetHit = Animator.StringToHash(getHitParameterName);
+
     }
 }

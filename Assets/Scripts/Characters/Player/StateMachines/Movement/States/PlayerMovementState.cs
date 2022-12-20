@@ -371,7 +371,7 @@ using UnityEngine.InputSystem;
             stateMachine.Player.CameraRecenteringUtility.DisableRecentering();
         }
 
-        protected void ResetVelocity()
+        internal void ResetVelocity()
         {
             stateMachine.Player.Rigidbody.velocity = Vector3.zero;
         }

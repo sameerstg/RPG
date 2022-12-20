@@ -67,7 +67,7 @@ using UnityEngine.InputSystem;
             }
         }
 
-        private void Jump()
+        internal void Jump()
         {
             Vector3 jumpForce = stateMachine.ReusableData.CurrentJumpForce;
 

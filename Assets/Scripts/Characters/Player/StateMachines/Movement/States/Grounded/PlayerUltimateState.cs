@@ -13,6 +13,9 @@ public class PlayerUltimateState : PlayerAttackState
         base.Enter();
         StartAnimation(stateMachine.Player.AnimationData.Ultimate);
 
+        
+
+
     }
     public override void Exit()
     {

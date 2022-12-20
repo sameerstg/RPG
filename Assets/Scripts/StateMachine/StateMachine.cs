@@ -7,8 +7,8 @@ using UnityEngine;
 
         public void ChangeState(IState newState)
         {
-/*        Debug.Log(newState);
-*/            currentState?.Exit();
+        Debug.Log(newState);
+        currentState?.Exit();
 
             currentState = newState;
 

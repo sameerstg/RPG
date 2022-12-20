@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -16,29 +17,32 @@ public class Enemy : MonoBehaviour
     internal IdleState idleState ;
     internal ChasingState chasingState;
     internal AttackingState attackingState;
+    internal GetHitState hitState;
+
+    
+    
+    
+    
     internal Animator animator;
+    private Slider healthSlider;
     internal Rigidbody rb;
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        healthSlider = GetComponentInChildren<Slider>();
         rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player");
         baseState = new(this);
         idleState = new(this);
         chasingState = new(this);
         attackingState = new(this);
-        
         baseState.enemy = this;
         SwitchState(idleState);
-
-
+        character.BalanceAbilities();
+        SetHealthSlider();
     }
-    private void Start()
-    {
-
-
-    }
+    
     private void Update()
     {
         state.Update();
@@ -61,7 +65,16 @@ public class Enemy : MonoBehaviour
         this.state = state;
         this.state.Enter();
     }
-    
+    internal void GetHit(float hitAmount)
+    {
+        character.GetHit(hitAmount);
+        SetHealthSlider();
+    }
+    internal void SetHealthSlider()
+    {
+        healthSlider.value = character.currentAbilities.healthValue.value / character.totalAbilities.healthValue.value;
+
+    }
 }
 public class BaseState :StateMachineImplementation
 {
@@ -215,8 +228,36 @@ public class AttackingState : BaseState
 
 }
 [System.Serializable]
+public class GetHitState : BaseState
+{
+    public override void Enter()
+    {
+        base.Enter();
+        enemy.animator.SetBool(enemy.animationData.getingHit[0], true);
+    }
+    public override void Exit()
+    {
+        base.Exit();
+        enemy.animator.SetBool(enemy.animationData.getingHit[0], false);
+
+    }
+    public override void OnAnimationExitEvent()
+    {
+        base.OnAnimationExitEvent();
+        enemy.SwitchState(enemy.idleState);
+    }
+    public GetHitState(Enemy enemy) : base(enemy)
+    {
+
+    }
+}
+
+
+[System.Serializable]
 public class AnimationData
 {
     [SerializeField] public List<string> chasing;
     [SerializeField] public List<string> attacking;
+    [SerializeField] public List<string> getingHit;
+
 }

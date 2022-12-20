@@ -1,14 +1,26 @@
 
 using UnityEngine;
-[CreateAssetMenu(fileName = "Character", menuName = "Character")]
 [System.Serializable]
-public class Character :ScriptableObject
+public class Character 
 {
 
-    public Abiblities abilities;
-    public void GetDamage()
+    public Abiblities baseAbilities = new();
+    public Abiblities currentAbilities = new();
+    public Abiblities totalAbilities = new();
+    public Abiblities maxAbilities = new();
+    internal void BalanceAbilities()
+    {
+        currentAbilities =totalAbilities = baseAbilities;
+
+    }
+    public void GetHit(float hitAmount)
     {
         Debug.Log("Get hit");
+        if (currentAbilities.healthValue.value>0)
+        {
+            currentAbilities.healthValue.value -= hitAmount;
+        }
+
     }
 }
 
@@ -30,12 +42,14 @@ public class Abiblities
 [System.Serializable]
 public class Flat
 {
+    [Range(0,999999999)]
     public float value;
 }
 
 [System.Serializable]
 public class Percentage
 {
+    [Range(0,100)]
     public float value;
 
 }

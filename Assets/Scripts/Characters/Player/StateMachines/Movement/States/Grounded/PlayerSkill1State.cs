@@ -11,13 +11,13 @@ public class PlayerSkill1State : PlayerAttackState
     public override void Enter()
     {
         base.Enter();
-        StartAnimation(stateMachine.Player.AnimationData.Combo);
+        StartAnimation(stateMachine.Player.AnimationData.Skill1);
 
     }
     public override void Exit()
     {
         base.Exit();
-        StopAnimation(stateMachine.Player.AnimationData.Combo);
+        StopAnimation(stateMachine.Player.AnimationData.Skill1);
 
     }
 }

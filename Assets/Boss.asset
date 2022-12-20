@@ -12,3 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5efed7958383d5a48a132777094c2fa3, type: 3}
   m_Name: Boss
   m_EditorClassIdentifier: 
+  baseAbilities:
+    attackValue:
+      value: 0
+    healthValue:
+      value: -2210
+    defenceValue:
+      value: 0
+    resistanceValue:
+      value: 0
+    speed:
+      value: 0
+    agility:
+      value: 0
+    weight:
+      value: 0
+    attackingRange: 0
+  currentAbilities:
+    attackValue:
+      value: 0
+    healthValue:
+      value: -2210
+    defenceValue:
+      value: 0
+    resistanceValue:
+      value: 0
+    speed:
+      value: 0
+    agility:
+      value: 0
+    weight:
+      value: 0
+    attackingRange: 0
+  totalAbilities:
+    attackValue:
+      value: 0
+    healthValue:
+      value: -2210
+    defenceValue:
+      value: 0
+    resistanceValue:
+      value: 0
+    speed:
+      value: 0
+    agility:
+      value: 0
+    weight:
+      value: 0
+    attackingRange: 0
+  maxAbilities:
+    attackValue:
+      value: 0
+    healthValue:
+      value: 99000
+    defenceValue:
+      value: 0
+    resistanceValue:
+      value: 0
+    speed:
+      value: 0
+    agility:
+      value: 0
+    weight:
+      value: 0
+    attackingRange: 0

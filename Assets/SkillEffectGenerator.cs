@@ -17,6 +17,7 @@ public class SkillEffectGenerator : MonoBehaviour
                     Quaternion.identity);
 
                 obj.transform.LookAt(GameManager._instance.enemyManager.GetClosestEnemy(obj.transform.position).transform.position);
+                obj.AddComponent<GeneratedAttack>().SetAttackDetails(new AttackDetails(30));
             }
         }
     }
@@ -40,4 +41,19 @@ public enum InstantiatePosition
 public enum AttackType
 {
     Combo,Skill1,Skill2,Ultimate
+}
+
+[System.Serializable]
+public class AttackDetails
+{
+    internal float attackAmount;
+
+    public AttackDetails(float attackAmount)
+    {
+        this.attackAmount = attackAmount;
+    }
+}
+public enum AttackingWay
+{
+    ByDistance,ByParticleCollision
 }
