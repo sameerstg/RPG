@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
     [RequireComponent(typeof(PlayerInput))]
@@ -24,25 +23,26 @@ using UnityEngine;
         public PlayerResizableCapsuleCollider ResizableCapsuleCollider { get; private set; }
 
         public Transform MainCameraTransform { get; private set; }
-
         private PlayerMovementStateMachine movementStateMachine;
-    internal SkillEffectGenerator skillEffectGenerator;
+        internal SkillEffectGenerator skillEffectGenerator;
+    internal GameObject cameraLookPoint;
         private void Awake()
         {
             CameraRecenteringUtility.Initialize();
             AnimationData.Initialize();
 
             Rigidbody = GetComponent<Rigidbody>();
-            Animator = GetComponentInChildren<Animator>();
+            Animator = GetComponent<Animator>();
 
-            Input = GetComponent<PlayerInput>();
+            Input = GetComponentInParent<PlayerInput>();
             ResizableCapsuleCollider = GetComponent<PlayerResizableCapsuleCollider>();
 
             MainCameraTransform = Camera.main.transform;
 
             movementStateMachine = new PlayerMovementStateMachine(this);
 
-        skillEffectGenerator = GetComponent<SkillEffectGenerator>();
+            skillEffectGenerator = GetComponent<SkillEffectGenerator>();
+            cameraLookPoint = transform.GetChild(1).gameObject;
         }
             
         private void Start()
@@ -90,6 +90,15 @@ using UnityEngine;
     public void OnAttackEvent()
     {
         movementStateMachine.OnAttackEvent();
+    }public void OnAirboneEvent()
+    {
+        movementStateMachine.OnAirboneEvent();
+    }public void OnAirboneExitEvent()
+    {
+        movementStateMachine.OnAirboneExitEvent();
+    }public void OnAirboneTransitionEvent()
+    {
+        movementStateMachine.OnAirboneTransitionEvent();
     }
 
     

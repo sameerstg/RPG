@@ -58,5 +58,17 @@ using UnityEngine;
         {
 
         currentState?.OnAttackEvent();
+        }public void OnAirboneEvent()
+        {
+
+        currentState?.OnAirboneEvent();
+        }public void OnAirboneExitEvent()
+        {
+
+        currentState?.OnAirboneExitEvent();
+        }public void OnAirboneTransitionEvent()
+        {
+
+        currentState?.OnAirboneTransitionEvent();
         }
     }

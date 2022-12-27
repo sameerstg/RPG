@@ -38,7 +38,7 @@ using UnityEngine.InputSystem;
 
         public virtual void Update()
         {
-        abilities = stateMachine.Player.Data.abilities;
+            abilities = stateMachine.Player.Data.abilities;
     }
 
         public virtual void PhysicsUpdate()
@@ -91,7 +91,7 @@ using UnityEngine.InputSystem;
             stateMachine.ReusableData.BackwardsCameraRecenteringData = groundedData.BackwardsCameraRecenteringData;
         }
 
-        protected void SetBaseRotationData()
+        internal void SetBaseRotationData()
         {
             stateMachine.ReusableData.RotationData = groundedData.BaseRotationData;
 
@@ -419,5 +419,31 @@ using UnityEngine.InputSystem;
     public virtual void OnAttackEvent()
     {
        
+    }
+    Vector3 positionBeforeAirbone;
+    bool isAirbone;
+    internal float airboneJumpForce;
+    public virtual void OnAirboneEvent()
+    {
+        positionBeforeAirbone = stateMachine.Player.transform.position;
+
+        isAirbone = true;
+        Debug.Log($"Airbone Start {positionBeforeAirbone.y}");
+        stateMachine.Player.Rigidbody.AddForce(Vector3.up * airboneJumpForce, ForceMode.Impulse);
+    }
+
+    public void OnAirboneExitEvent()
+    {
+        stateMachine.Player.transform.position = positionBeforeAirbone;
+        Debug.Log($"Airbone Exit {positionBeforeAirbone.y}");
+
+
+    }
+    public void OnAirboneTransitionEvent()
+    {
+        isAirbone = false;
+        Debug.Log("Airbone Transition");
+
+
     }
 }

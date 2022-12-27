@@ -11,15 +11,23 @@ public class PlayerRollLeft : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Rolling state");
-        stateMachine.ReusableData.MovementDecelerationForce = groundedData.StopData.HardDecelerationForce;
-
+        ResetVelocity();
+        stateMachine.Player.Animator.applyRootMotion = true;
         StartAnimation(stateMachine.Player.AnimationData.RollLeftParameterHash);
     }
-
+    public override void Update()
+    {
+        
+    }
+    public override void PhysicsUpdate()
+    {
+        
+    }
     public override void Exit()
     {
         base.Exit();
+        stateMachine.Player.Animator.applyRootMotion = false;
+
         StopAnimation(stateMachine.Player.AnimationData.RollLeftParameterHash);
 
     }   

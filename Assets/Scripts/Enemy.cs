@@ -8,11 +8,10 @@ public class Enemy : MonoBehaviour
 {
 
 
-    [SerializeField]internal Character character;
+    
     StateMachineImplementation state;
     public AnimationData animationData;
     internal NavMeshAgent agent;
-    [SerializeField]internal GameObject player;
     internal BaseState baseState;
     internal IdleState idleState ;
     internal ChasingState chasingState;
@@ -32,15 +31,14 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
         healthSlider = GetComponentInChildren<Slider>();
         rb = GetComponent<Rigidbody>();
-        player = GameObject.FindGameObjectWithTag("Player");
         baseState = new(this);
         idleState = new(this);
         chasingState = new(this);
         attackingState = new(this);
         baseState.enemy = this;
         SwitchState(idleState);
-        character.BalanceAbilities();
-        SetHealthSlider();
+/*        character.BalanceAbilities();
+*/        SetHealthSlider();
     }
     
     private void Update()
@@ -67,13 +65,13 @@ public class Enemy : MonoBehaviour
     }
     internal void GetHit(float hitAmount)
     {
-        character.GetHit(hitAmount);
-        SetHealthSlider();
+/*        character.GetHit(hitAmount);
+*/        SetHealthSlider();
     }
     internal void SetHealthSlider()
     {
-        healthSlider.value = character.currentAbilities.healthValue.value / character.totalAbilities.healthValue.value;
-
+/*        healthSlider.value = character.currentAbilities.healthValue.value / character.totalAbilities.healthValue.value;
+*/
     }
 }
 public class BaseState :StateMachineImplementation
@@ -117,7 +115,7 @@ public class BaseState :StateMachineImplementation
     }
     internal void LookAtPlayer()
     {
-        enemy.rb.MoveRotation(Quaternion.Euler(new Vector3(0, GetDirectionAngle(-enemy.transform.position + enemy.player.transform.position), 0)));
+        enemy.rb.MoveRotation(Quaternion.Euler(new Vector3(0, GetDirectionAngle(-enemy.transform.position + CharacterHolder.activeCharacterGO.transform.position), 0)));
 
     }
     private float GetDirectionAngle(Vector3 direction)
@@ -134,7 +132,7 @@ public class BaseState :StateMachineImplementation
     public override void Update()
     {
         
-        distanceFromPlayer = Vector3.Distance(enemy.player.transform.position, enemy.transform.position);
+        distanceFromPlayer = Vector3.Distance(CharacterHolder.activeCharacterGO.transform.position, enemy.transform.position);
     }
     internal void CheckToAttack()
     {
@@ -182,7 +180,7 @@ public class ChasingState : BaseState
     {
         base.Update();
         LookAtPlayer();
-        enemy.agent.SetDestination(enemy.player.transform.position);
+        enemy.agent.SetDestination(CharacterHolder.activeCharacterGO.transform.position);
         CheckToAttack();
     }
     public override void Exit()

@@ -8,7 +8,8 @@ using UnityEngine;
 
         private void Awake()
         {
-            player = transform.parent.GetComponent<Player>();
+            //player = transform.parent.GetComponent<Player>();
+            player = GetComponent<Player>();
         }
 
         public void TriggerOnMovementStateAnimationEnterEvent()
@@ -49,6 +50,21 @@ using UnityEngine;
     {
         
         player.OnAttackEvent();
+
+    }public void Airbone()
+    {
+        
+        player.OnAirboneEvent();
+
+    }public void AirboneExit()
+    {
+        
+        player.OnAirboneExitEvent();
+
+    }public void AirboneTransition()
+    {
+        
+        player.OnAirboneTransitionEvent();
 
     }
 }

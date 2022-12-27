@@ -13,5 +13,8 @@ using UnityEngine;
         public void OnAnimationExitEvent();
         public void OnAnimationTransitionEvent();
         public void OnAttackEvent();
+        public void OnAirboneEvent();
+        public void OnAirboneExitEvent();
+        public void OnAirboneTransitionEvent();
 
     }

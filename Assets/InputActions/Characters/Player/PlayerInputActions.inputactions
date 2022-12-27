@@ -121,6 +121,42 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SelectCharacter1",
+                    "type": "Button",
+                    "id": "6794c770-44df-4d2a-9bc7-f3e63d294e9b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectCharacter2",
+                    "type": "Button",
+                    "id": "8b290c5c-bc2b-4da7-b511-305c2c94c6bf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectCharacter3",
+                    "type": "Button",
+                    "id": "b333c0ab-157b-4294-9ae9-0cec23da896f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectCharacter4",
+                    "type": "Button",
+                    "id": "b5b36382-bbce-48f9-9b58-bb9692f596c9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -352,6 +388,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Ultimate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3ece2c5c-4994-4b65-8ca4-42bd7af014f2",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectCharacter1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "59020852-c6a3-4afd-b690-6727e2a424bf",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectCharacter2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5f177533-8e38-4072-b1ea-c96d7a0b26e4",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectCharacter3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "df1b7abe-aa6f-44e7-b403-2dd3dcbb5bdf",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectCharacter4",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

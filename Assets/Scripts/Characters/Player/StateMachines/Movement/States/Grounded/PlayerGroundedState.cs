@@ -113,17 +113,26 @@ using UnityEngine.InputSystem;
 
     private void OnUltimate(InputAction.CallbackContext obj)
     {
-        stateMachine.ChangeState(stateMachine.UltimateState);
-    }
+        if (!stateMachine.Player.skillEffectGenerator.GetAttackByAttackType(AttackType.Ultimate).cooldown.IsCooldown())
+        {
+            stateMachine.ChangeState(stateMachine.UltimateState);
+        }
+        }
 
-    private void OnSkill2Started(InputAction.CallbackContext obj)
+        private void OnSkill2Started(InputAction.CallbackContext obj)
     {
-        stateMachine.ChangeState(stateMachine.Skill2State);
-    }
+        if (!stateMachine.Player.skillEffectGenerator.GetAttackByAttackType(AttackType.Skill2).cooldown.IsCooldown())
+        {
+            stateMachine.ChangeState(stateMachine.Skill2State);
+        }
+        }
 
-    private void OnSkill1Started(InputAction.CallbackContext obj)
+        private void OnSkill1Started(InputAction.CallbackContext obj)
     {
-        stateMachine.ChangeState(stateMachine.Skill1State);
+        if (!stateMachine.Player.skillEffectGenerator.GetAttackByAttackType(AttackType.Skill1).cooldown.IsCooldown())
+        {
+            stateMachine.ChangeState(stateMachine.Skill1State);
+        }
     }
 
     private void OnRollStarted(InputAction.CallbackContext context)
@@ -143,31 +152,30 @@ using UnityEngine.InputSystem;
             base.RemoveInputActionsCallbacks();
 
             stateMachine.Player.Input.PlayerActions.Dash.started -= OnDashStarted;
-
             stateMachine.Player.Input.PlayerActions.Jump.started -= OnJumpStarted;
-        stateMachine.Player.Input.PlayerActions.Combo.started -= OnComboStarted;
-        stateMachine.Player.Input.PlayerActions.Skill1.started -= OnSkill1Started;
-        stateMachine.Player.Input.PlayerActions.Skill2.started -= OnSkill2Started;
-        stateMachine.Player.Input.PlayerActions.Ultimate.started -= OnUltimate;
+            stateMachine.Player.Input.PlayerActions.Combo.started -= OnComboStarted;
+            stateMachine.Player.Input.PlayerActions.Skill1.started -= OnSkill1Started;
+            stateMachine.Player.Input.PlayerActions.Skill2.started -= OnSkill2Started;
+            stateMachine.Player.Input.PlayerActions.Ultimate.started -= OnUltimate;
 
 
     }
 
     internal virtual void OnComboStarted(InputAction.CallbackContext obj)
     {
-        stateMachine.ChangeState(stateMachine.ComboState);
+        if (!stateMachine.Player.skillEffectGenerator.GetAttackByAttackType(AttackType.Combo).cooldown.IsCooldown())
+        {
+            stateMachine.ChangeState(stateMachine.ComboState);
+        }
     }
-
     protected virtual void OnDashStarted(InputAction.CallbackContext context)
         {
             stateMachine.ChangeState(stateMachine.DashingState);
         }
-
         protected virtual void OnJumpStarted(InputAction.CallbackContext context)
         {
             stateMachine.ChangeState(stateMachine.JumpingState);
         }
-
         protected virtual void OnMove()
         {
             if (stateMachine.ReusableData.ShouldSprint)

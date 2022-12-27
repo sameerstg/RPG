@@ -16,18 +16,32 @@ public class PlayerAttackState : PlayerGroundedState
         stateMachine.ReusableData.MovementSpeedModifier = 0;
         stateMachine.ReusableData.MovementDecelerationForce = groundedData.StopData.HardDecelerationForce;
         stateMachine.ReusableData.CurrentJumpForce = airborneData.JumpData.StrongForce;
+        stateMachine.Player.Animator.applyRootMotion = true;
+
         ResetVelocity();
 
     }
     public override void Update()
     {
-        base.Update();
         LookAtEnemy();
     }
     public override void Exit()
     {
         base.Exit();
+        stateMachine.Player.Animator.applyRootMotion = false;
+
         StopAnimation(stateMachine.Player.AnimationData.Attack);
+
+    }
+    public override void PhysicsUpdate()
+    {
+    }
+    protected override void AddInputActionsCallbacks()
+    {
+
+    }
+    protected override void RemoveInputActionsCallbacks()
+    {
 
     }
     public override void OnAnimationExitEvent()

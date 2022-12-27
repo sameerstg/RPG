@@ -143,6 +143,42 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectCharacter1"",
+                    ""type"": ""Button"",
+                    ""id"": ""6794c770-44df-4d2a-9bc7-f3e63d294e9b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectCharacter2"",
+                    ""type"": ""Button"",
+                    ""id"": ""8b290c5c-bc2b-4da7-b511-305c2c94c6bf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectCharacter3"",
+                    ""type"": ""Button"",
+                    ""id"": ""b333c0ab-157b-4294-9ae9-0cec23da896f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectCharacter4"",
+                    ""type"": ""Button"",
+                    ""id"": ""b5b36382-bbce-48f9-9b58-bb9692f596c9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -376,6 +412,50 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Ultimate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ece2c5c-4994-4b65-8ca4-42bd7af014f2"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectCharacter1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""59020852-c6a3-4afd-b690-6727e2a424bf"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectCharacter2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f177533-8e38-4072-b1ea-c96d7a0b26e4"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectCharacter3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""df1b7abe-aa6f-44e7-b403-2dd3dcbb5bdf"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectCharacter4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -397,6 +477,10 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Skill1 = m_Player.FindAction("Skill 1", throwIfNotFound: true);
         m_Player_Skill2 = m_Player.FindAction("Skill 2", throwIfNotFound: true);
         m_Player_Ultimate = m_Player.FindAction("Ultimate", throwIfNotFound: true);
+        m_Player_SelectCharacter1 = m_Player.FindAction("SelectCharacter1", throwIfNotFound: true);
+        m_Player_SelectCharacter2 = m_Player.FindAction("SelectCharacter2", throwIfNotFound: true);
+        m_Player_SelectCharacter3 = m_Player.FindAction("SelectCharacter3", throwIfNotFound: true);
+        m_Player_SelectCharacter4 = m_Player.FindAction("SelectCharacter4", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -469,6 +553,10 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Skill1;
     private readonly InputAction m_Player_Skill2;
     private readonly InputAction m_Player_Ultimate;
+    private readonly InputAction m_Player_SelectCharacter1;
+    private readonly InputAction m_Player_SelectCharacter2;
+    private readonly InputAction m_Player_SelectCharacter3;
+    private readonly InputAction m_Player_SelectCharacter4;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -486,6 +574,10 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Skill1 => m_Wrapper.m_Player_Skill1;
         public InputAction @Skill2 => m_Wrapper.m_Player_Skill2;
         public InputAction @Ultimate => m_Wrapper.m_Player_Ultimate;
+        public InputAction @SelectCharacter1 => m_Wrapper.m_Player_SelectCharacter1;
+        public InputAction @SelectCharacter2 => m_Wrapper.m_Player_SelectCharacter2;
+        public InputAction @SelectCharacter3 => m_Wrapper.m_Player_SelectCharacter3;
+        public InputAction @SelectCharacter4 => m_Wrapper.m_Player_SelectCharacter4;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -534,6 +626,18 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Ultimate.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUltimate;
                 @Ultimate.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUltimate;
                 @Ultimate.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUltimate;
+                @SelectCharacter1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectCharacter1;
+                @SelectCharacter1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectCharacter1;
+                @SelectCharacter1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectCharacter1;
+                @SelectCharacter2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectCharacter2;
+                @SelectCharacter2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectCharacter2;
+                @SelectCharacter2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectCharacter2;
+                @SelectCharacter3.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectCharacter3;
+                @SelectCharacter3.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectCharacter3;
+                @SelectCharacter3.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectCharacter3;
+                @SelectCharacter4.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectCharacter4;
+                @SelectCharacter4.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectCharacter4;
+                @SelectCharacter4.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectCharacter4;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -577,6 +681,18 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Ultimate.started += instance.OnUltimate;
                 @Ultimate.performed += instance.OnUltimate;
                 @Ultimate.canceled += instance.OnUltimate;
+                @SelectCharacter1.started += instance.OnSelectCharacter1;
+                @SelectCharacter1.performed += instance.OnSelectCharacter1;
+                @SelectCharacter1.canceled += instance.OnSelectCharacter1;
+                @SelectCharacter2.started += instance.OnSelectCharacter2;
+                @SelectCharacter2.performed += instance.OnSelectCharacter2;
+                @SelectCharacter2.canceled += instance.OnSelectCharacter2;
+                @SelectCharacter3.started += instance.OnSelectCharacter3;
+                @SelectCharacter3.performed += instance.OnSelectCharacter3;
+                @SelectCharacter3.canceled += instance.OnSelectCharacter3;
+                @SelectCharacter4.started += instance.OnSelectCharacter4;
+                @SelectCharacter4.performed += instance.OnSelectCharacter4;
+                @SelectCharacter4.canceled += instance.OnSelectCharacter4;
             }
         }
     }
@@ -596,5 +712,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnSkill1(InputAction.CallbackContext context);
         void OnSkill2(InputAction.CallbackContext context);
         void OnUltimate(InputAction.CallbackContext context);
+        void OnSelectCharacter1(InputAction.CallbackContext context);
+        void OnSelectCharacter2(InputAction.CallbackContext context);
+        void OnSelectCharacter3(InputAction.CallbackContext context);
+        void OnSelectCharacter4(InputAction.CallbackContext context);
     }
 }
